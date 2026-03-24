@@ -1,50 +1,245 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SEO JANCUK KALIAN</title>
-    <style>
-        /* Semua teks otomatis HURUF BESAR */
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            padding: 50px;
-            background-color: #f0f0f0;
-            text-transform: uppercase; /* SEMUA TEKS JADI HURUF BESAR */
-            margin: 0;
-        }
+<meta charset="UTF-8">
+<title>AJAIB4D Generator</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+*{box-sizing:border-box;font-family:Arial,Helvetica,sans-serif}
+body{margin:0;background:#fff;color:#0b1a2b;overflow:hidden}
+.main{filter:blur(8px);pointer-events:none}
+.container{max-width:1100px;margin:40px auto;padding:0 20px}
+h1{text-align:center;margin-bottom:5px}
+.subtitle{text-align:center;font-size:13px;color:#0b3a6b;margin-bottom:30px}
 
-        h1 {
-            color: #333;
-            font-size: 48px;
-            margin-bottom: 20px;
-        }
+.panel{display:grid;grid-template-columns:1fr 300px;gap:20px}
+.left{border-radius:12px;overflow:hidden;border:2px solid #1e90ff;display:flex;flex-direction:column}
+.left .areas{display:flex;height:420px}
+.left textarea{width:100%;height:100%;border:none;padding:15px;font-size:14px;resize:none;outline:none}
+.left .areas textarea{flex:1}
+.left .areas.hidden textarea:nth-child(2){display:none}
 
-        p {
-            font-size: 20px;
-            color: #555;
-            line-height: 1.5;
-        }
+.copy{background:#0b2f5f;color:#fff;text-align:center;padding:12px;cursor:pointer}
 
-        a.button {
-            display: inline-block;
-            margin-top: 20px;
-            padding: 12px 25px;
-            background-color: #007bff;
-            color: #fff;
-            text-decoration: none;
-            border-radius: 8px;
-        }
+.right{background:#eef8ff;border-radius:12px;padding:20px}
+.right button{width:100%;padding:12px;margin-bottom:12px;border:none;border-radius:6px;background:#00a8ff;color:#fff;font-size:14px;cursor:pointer}
+.right .upper{background:#1e90ff}
+.right .clear{background:none;color:red}
 
-        a.button:hover {
-            background-color: #0056b3;
-        }
-    </style>
+.translate-box{display:none;margin-bottom:12px}
+.translate-box select{
+  width:100%;padding:8px;margin-bottom:6px;border-radius:6px;border:1px solid #1e90ff
+}
+
+/* LOGIN */
+.overlay{
+  position:fixed;inset:0;
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(255,255,255,.6);backdrop-filter:blur(4px);
+  z-index:10;
+}
+.login-box{
+  background:#fff;padding:30px;border-radius:16px;
+  box-shadow:0 20px 60px rgba(0,0,0,.2);
+  text-align:center;min-width:300px
+}
+.login-box input{
+  width:100%;padding:12px;border:2px solid #1e90ff;border-radius:8px;outline:none;margin-bottom:10px
+}
+.login-box button{
+  width:100%;padding:12px;border:none;border-radius:8px;background:#1e90ff;color:#fff;cursor:pointer
+}
+.status{font-size:13px;margin-top:8px}
+
+/* LEDAKAN */
+.boom{
+  position:fixed;inset:0;display:none;
+  align-items:center;justify-content:center;
+  background:#000;z-index:20;
+}
+.boom .title{
+  color:#fff;font-size:64px;font-weight:bold;
+  text-shadow:0 0 20px #00f,0 0 40px #0ff,0 0 80px #fff;
+  animation:pulse 1.2s ease-out forwards;
+}
+.lightning{
+  position:absolute;inset:0;
+  background:
+    linear-gradient(120deg, transparent 45%, #8ff 50%, transparent 55%),
+    linear-gradient(300deg, transparent 45%, #fff 50%, transparent 55%);
+  opacity:0;
+  animation:flash .15s linear infinite;
+}
+@keyframes flash{0%,90%{opacity:0}92%{opacity:1}100%{opacity:0}}
+@keyframes pulse{0%{transform:scale(.2);opacity:0}40%{transform:scale(1.2);opacity:1}100%{transform:scale(1);opacity:0}}
+</style>
 </head>
 <body>
-    <h1>LASAK YANG BUAT LINK PHISING</h1>
-    <p>ah mantap.</p>
-    <a href="#" class="button">link alternatif ajaib4d</a>
-</body>ajaibtama.com
-</html>ajaibsaya.com
+
+<div class="overlay" id="overlay">
+  <div class="login-box">
+    <input id="uid" placeholder="Ketik aja AJAIB4D" onkeydown="if(event.key==='Enter') login()">
+    <button onclick="login()">Masuk</button>
+    <div class="status" id="status"></div>
+  </div>
+</div>
+
+<div class="boom" id="boom">
+  <div class="lightning"></div>
+  <div class="title">AJAIB4D</div>
+</div>
+
+<div class="main" id="main">
+  <div class="container">
+    <h1>Convert Case</h1>
+    <div class="subtitle">PAKE AJA KALO MEMBANTU (AJAIB4D)</div>
+
+    <div class="panel">
+      <div class="left">
+        <div class="areas hidden" id="areas">
+          <textarea id="textA" placeholder="Tempel di sini dek..."></textarea>
+          <textarea id="textB" placeholder="Hasil translate..."></textarea>
+        </div>
+        <div class="copy" onclick="copyText()">LANGSUNG COPY SEMUA</div>
+      </div>
+
+      <div class="right">
+        <button onclick="generate()">BUAT PREDIKSI TOGEL</button>
+        <button class="upper" onclick="toUpper()">GANTI HURUF BESAR</button>
+        <button onclick="toggleTranslate()">TRANSLATE BAHASA</button>
+
+        <div class="translate-box" id="tbox">
+          <select id="from">
+            <option value="id">INDONESIA</option>
+            <option value="en">ENGLISH</option>
+            <option value="km">KHMER</option>
+          </select>
+          <select id="to">
+            <option value="en">ENGLISH</option>
+            <option value="id">INDONESIA</option>
+            <option value="km">KHMER</option>
+          </select>
+          <button onclick="doTranslate()">PROSES TRANSLATE</button>
+          <button onclick="cancelTranslate()" style="background:#ccc;color:#000;margin-top:6px">CANCEL TRANSLATE</button>
+        </div>
+
+        <button class="clear" onclick="clearAll()">Clear</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const uidEl = document.getElementById('uid');
+const overlayEl = document.getElementById('overlay');
+const mainEl = document.getElementById('main');
+const boomEl = document.getElementById('boom');
+const statusEl = document.getElementById('status');
+const areas = document.getElementById('areas');
+const textA = document.getElementById('textA');
+const textB = document.getElementById('textB');
+const tbox = document.getElementById('tbox');
+
+function login(){
+  const v = uidEl.value.trim().toLowerCase();
+  if(v === 'ajaib4d'){
+    statusEl.style.color='green';
+    statusEl.textContent='Akses diterima';
+    overlayEl.style.display='none';
+    mainEl.style.filter='none';
+    mainEl.style.pointerEvents='auto';
+    boomEl.style.display='flex';
+    setTimeout(()=>boomEl.style.display='none',1200);
+  }else{
+    statusEl.style.color='red';
+    statusEl.textContent='USER ID salah';
+  }
+}
+
+function r(n){return Math.floor(Math.random()*n)}
+function d(){return r(10)}
+function two(){return ''+d()+d()}
+const shio=["TIKUS","KERBAU","HARIMAU","KELINCI","NAGA","ULAR","KUDA","KAMBING","MONYET","AYAM","ANJING","BABI"];
+const pasaran=["ETAWAH","SYDNEY","TAIPING","SINGAPORE","HONGKONG","TOTO WUHAN","HONGKONG SIANG","MALAYSIA"];
+
+function block(name){
+  let main=[d(),d(),d(),d()];
+  let bbfs=[main[0],main[1],main[2],d(),main[3]];
+  let colok=[main[0],main[3]];
+  let top=[]; for(let i=0;i<25;i++) top.push(two());
+  let panas=[top[0],top[1],top[2]];
+  return `PREDIKSI > ${name}
+ANGKA MAIN : ${main.join(' ')}
+BBFS : ${bbfs.join(' ')}
+SHIO : ${shio[r(shio.length)]}
+COLOK ANGKA : ${colok.join(' ')}
+
+TOP 2D :
+${top.slice(0,5).join(' ')}
+${top.slice(5,10).join(' ')}
+${top.slice(10,15).join(' ')}
+${top.slice(15,20).join(' ')}
+${top.slice(20,25).join(' ')}
+
+ANGKA PANASNYA : ${panas.join(' ')}
+----------------------------`;
+}
+
+function generate(){
+  let out=`PREDIKSI GACOR AJAIB4D^^\n${new Date().toLocaleDateString('id-ID',{weekday:'long',day:'2-digit',month:'long',year:'numeric'}).toUpperCase()}\n\n`;
+  pasaran.forEach(p=>out+=block(p)+"\n");
+  textA.value = out;
+}
+
+function toUpper(){
+  textA.value = textA.value.toUpperCase();
+}
+
+function toggleTranslate(){
+  areas.classList.remove('hidden');
+  tbox.style.display = 'block';
+}
+
+async function doTranslate(){
+  const q = textA.value.trim();
+  if(!q){ alert('Teks kosong'); return; }
+
+  const from = document.getElementById('from').value;
+  const to = document.getElementById('to').value;
+
+  const payload = { q:q, source:from, target:to, format:'text' };
+  const targetUrl = 'https://translate.argosopentech.com/translate';
+
+  try{
+    const res = await fetch(
+      'https://api.allorigins.win/raw?url=' + encodeURIComponent(targetUrl),
+      {
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body: JSON.stringify(payload)
+      }
+    );
+    if(!res.ok) throw new Error('HTTP Error');
+    const data = await res.json();
+    textB.value = data.translatedText;
+  }catch(e){
+    alert('Translate gagal. Server translate sedang dibatasi.');
+  }
+}
+
+function cancelTranslate(){
+  areas.classList.add('hidden');
+  tbox.style.display = 'none';
+  textB.value = '';
+}
+
+function clearAll(){ textA.value=''; textB.value='' }
+
+function copyText(){
+  (textB.value ? textB : textA).select();
+  document.execCommand('copy');
+  alert('Tersalin!');
+}
+</script>
+</body>
+</html>
